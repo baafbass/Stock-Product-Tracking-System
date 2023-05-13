@@ -15,7 +15,7 @@ namespace UrunStokTakip.Models
     public partial class Sepet
     {
         public int Id { get; set; }
-        public string UrunAd { get; set; }
+        public Nullable<int> UrunId { get; set; }
         public Nullable<int> Adet { get; set; }
         public Nullable<decimal> Fiyat { get; set; }
         public Nullable<System.DateTime> Tarih { get; set; }

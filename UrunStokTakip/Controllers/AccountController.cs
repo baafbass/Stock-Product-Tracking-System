@@ -30,7 +30,7 @@ namespace UrunStokTakip.Controllers
                 FormsAuthentication.SetAuthCookie(bilgiler.Email, false);
                 Session["Mail"] = bilgiler.Email.ToString();
                 Session["Ad"] = bilgiler.Ad.ToString();
-                Session["Soyad"] = bilgiler.Ad.ToString();
+                Session["Soyad"] = bilgiler.Soyad.ToString();
                 return RedirectToAction("Index", "Home");
             }
             else 
@@ -53,13 +53,10 @@ namespace UrunStokTakip.Controllers
             db.SaveChanges();
             return RedirectToAction("Login", "Account");
         }
-
-
-
-
-
-
-
-
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account");
+        }
     }
 }

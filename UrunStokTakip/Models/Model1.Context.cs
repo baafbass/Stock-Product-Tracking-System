@@ -28,8 +28,8 @@ namespace UrunStokTakip.Models
         public virtual DbSet<Kategori> Kategoris { get; set; }
         public virtual DbSet<Kullanici> Kullanicis { get; set; }
         public virtual DbSet<Satislar> Satislars { get; set; }
-        public virtual DbSet<Sepet> Sepets { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Urun> Uruns { get; set; }
+        public virtual DbSet<Sepet> Sepets { get; set; }
     }
 }
