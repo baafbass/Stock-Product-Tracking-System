@@ -7,7 +7,8 @@
 
 
 <a href="~/Urun/Ekle" class="btn btn-primary">Ekle</a>
-
+<br/>
+<br/>
 <table class="table table-bordered">
     <tr>
         <th>Resim</th>
@@ -17,15 +18,15 @@
         <th>Fiyat</th>
         <th>Stok</th>
         <th>Kategori</th>
-        @if (User.IsInRole("Admin"))
-        {
+      <!--  @if (User.IsInRole("Admin"))
+        {} -->
             <th>Sil</th>
             <th>Düzenle</th>
-        }
-        @if (User.IsInRole("User"))
-        {
+        
+      <!--  @if (User.IsInRole("User"))
+        {} -->
             <th>Sepete Ekle</th>
-        }
+        
 
     </tr>
        
@@ -45,23 +46,20 @@
         <label class="btn btn-danger">Hayır</label>
     }
     </td>
-    <td>@item.Populer</td>
     <td>@item.Fiyat</td>
     <td>@item.Stok</td>
-    <td>@item.Kategori</td>
+    <td>@item.Kategori.Ad</td>
 
-    @if (User.IsInRole("Admin"))
-    {
-        <td>@Html.ActionLink("Sil", "Sil", new { @class = "btn btn-danger", onclick = "return confirm('Silmek istiyor musunuz ?')" })</td>
-        <td><a href="/Urun/Guncelle/@item.Id" class="btn btn-warning"></a></td>
-    }
-    @if (User.IsInRole("User"))
-    {
-        <td><a href="/Sepet/SepeteEkle/@item.Id" class="btn btn-success">Sepete Ekle</a></td>
-    }
-
+   <!-- @if (User.IsInRole("Admin"))
+    { } -->
+    <td><a href="/Urun/Sil/@item.Id">Sil</a></td>
+    <td><a href="/Urun/Guncelle/@item.Id" class="btn btn-warning">Düzenle</a></td>
+    
+   <!-- @if (User.IsInRole("User"))
+    { } -->
+     <td><a href="/Sepet/SepeteEkle/@item.Id" class="btn btn-success">Sepete Ekle</a></td>
 </tr>
-            }
+         }
 
 
 </table>

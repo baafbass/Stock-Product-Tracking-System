@@ -17,21 +17,21 @@
             </div>
             <ul class="nav navbar-nav">
 
-                @if(User.IsInRole("Admin"))
-                {
+               <!-- @if (User.IsInRole("Admin"))
+                { } -->
                 <li><a href="/Kullanici/Index">Kullanıcı</a></li>
                 <li><a href="/TumSatislar/Index">Tüm Satışlar</a></li>
-                }
+               
 
                 <li><a href="/Kategori/Index">Kategoriler</a></li>
-                <li><a href="/Kullanici/Guncelle" style="color:white">@Session["Ad"] @Session["Soyad"]</a></li>
+                <li><a href="/Kullanici/Guncel" style="color:white">@Session["Ad"] @Session["Soyad"]</a></li>
                 <li><a href="/Urun/Index">Ürünler</a></li>
 
-                @if(User.IsInRole("User"))
-                {
+              <!--  @if (User.IsInRole("User"))
+                { } -->
                 <li><a href="/Satis/Index">Satışlar</a></li>
                 <li><a href="/Sepet/Index">Sepetim</a></li>
-                }
+               
                 <li><a href="/Account/LogOut">Çıkış Yap</a></li>
             </ul>
         </div>
