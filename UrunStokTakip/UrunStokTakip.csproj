@@ -52,6 +52,11 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -118,8 +123,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -185,6 +190,10 @@
     <Content Include="NiceAdmin\assets\vendor\boxicons\css\boxicons.min.css" />
     <Content Include="NiceAdmin\assets\vendor\boxicons\css\transformations.css" />
     <Content Include="NiceAdmin\assets\vendor\boxicons\fonts\boxicons.svg" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chart.js" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chart.umd.js" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chunks\helpers.segment.js" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\helpers.js" />
     <Content Include="NiceAdmin\assets\vendor\echarts\echarts.common.js" />
     <Content Include="NiceAdmin\assets\vendor\echarts\echarts.common.min.js" />
     <Content Include="NiceAdmin\assets\vendor\echarts\echarts.esm.js" />
@@ -387,6 +396,7 @@
     <Content Include="NiceAdmin\pages-contact.html" />
     <Content Include="NiceAdmin\pages-error-404.html" />
     <Content Include="NiceAdmin\pages-faq.html" />
+    <Content Include="NiceAdmin\pages-login.html" />
     <Content Include="NiceAdmin\pages-register.html" />
     <Content Include="NiceAdmin\Readme.txt" />
     <Content Include="NiceAdmin\tables-data.html" />
@@ -404,6 +414,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UrunController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -434,12 +445,13 @@
     <Compile Include="Models\Sepet.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Urun.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="netfx\System\Linq\Expressions\ExpressionCombiner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roller\AdminRolProvider.cs" />
   </ItemGroup>
@@ -530,6 +542,16 @@
     <Content Include="NiceAdmin\assets\vendor\boxicons\fonts\boxicons.ttf" />
     <Content Include="NiceAdmin\assets\vendor\boxicons\fonts\boxicons.woff" />
     <Content Include="NiceAdmin\assets\vendor\boxicons\fonts\boxicons.woff2" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chart.cjs" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chart.cjs.map" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chart.js.map" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chart.umd.js.map" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chunks\helpers.segment.cjs" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chunks\helpers.segment.cjs.map" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\chunks\helpers.segment.js.map" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\helpers.cjs" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\helpers.cjs.map" />
+    <Content Include="NiceAdmin\assets\vendor\chart.js\helpers.js.map" />
     <Content Include="NiceAdmin\assets\vendor\echarts\echarts.common.js.map" />
     <Content Include="NiceAdmin\assets\vendor\echarts\echarts.esm.js.map" />
     <Content Include="NiceAdmin\assets\vendor\echarts\echarts.js.map" />
@@ -566,6 +588,8 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Urun\Index.cshtml" />
+    <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -575,13 +599,107 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="NiceAdmin\assets\vendor\tinymce\tinymce.d.ts" />
+    <Folder Include="Content\Image\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\controllers\controller.bar.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\controllers\controller.bubble.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\controllers\controller.doughnut.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\controllers\controller.line.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\controllers\controller.pie.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\controllers\controller.polarArea.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\controllers\controller.radar.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\controllers\controller.scatter.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\controllers\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.adapters.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.animation.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.animations.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.animations.defaults.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.animator.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.config.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.controller.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.datasetController.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.defaults.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.element.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.interaction.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.layouts.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.layouts.defaults.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.plugins.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.registry.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.scale.autoskip.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.scale.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.scale.defaults.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.ticks.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\core.typedRegistry.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\core\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\elements\element.arc.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\elements\element.bar.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\elements\element.line.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\elements\element.point.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\elements\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.canvas.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.collection.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.config.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.core.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.curve.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.dom.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.easing.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.extras.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.interpolation.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.intl.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.math.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.options.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.rtl.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\helpers.segment.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\helpers\types.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\index.umd.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\platform\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\platform\platform.base.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\platform\platform.basic.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\platform\platform.dom.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.colors.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.decimation.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.filler\filler.drawing.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.filler\filler.helper.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.filler\filler.options.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.filler\filler.segment.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.filler\filler.target.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.filler\filler.target.stack.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.filler\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.filler\simpleArc.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.legend.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.subtitle.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.title.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\plugins\plugin.tooltip.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\scales\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\scales\scale.category.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\scales\scale.linear.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\scales\scale.linearbase.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\scales\scale.logarithmic.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\scales\scale.radialLinear.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\scales\scale.time.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\scales\scale.timeseries.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\animation.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\basic.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\color.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\geometric.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\helpers\helpers.canvas.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\helpers\helpers.segment.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\helpers\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\index.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\layout.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\chart.js\types\utils.d.ts" />
+    <TypeScriptCompile Include="NiceAdmin\assets\vendor\tinymce\tinymce.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

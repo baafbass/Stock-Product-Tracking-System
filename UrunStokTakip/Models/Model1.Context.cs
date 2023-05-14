@@ -13,10 +13,10 @@ namespace UrunStokTakip.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Takip_SistemiEntities : DbContext
+    public partial class Takip_SistemiEntities1 : DbContext
     {
-        public Takip_SistemiEntities()
-            : base("name=Takip_SistemiEntities")
+        public Takip_SistemiEntities1()
+            : base("name=Takip_SistemiEntities1")
         {
         }
     
@@ -25,11 +25,11 @@ namespace UrunStokTakip.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Kategori> Kategoris { get; set; }
-        public virtual DbSet<Kullanici> Kullanicis { get; set; }
-        public virtual DbSet<Satislar> Satislars { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Urun> Uruns { get; set; }
-        public virtual DbSet<Sepet> Sepets { get; set; }
+        public virtual DbSet<Kategori> Kategori { get; set; }
+        public virtual DbSet<Kullanici> Kullanici { get; set; }
+        public virtual DbSet<Satislar> Satislar { get; set; }
+        public virtual DbSet<Sepet> Sepet { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Urun> Urun { get; set; }
     }
 }

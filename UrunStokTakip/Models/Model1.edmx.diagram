@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dab9288da7c6460f901e069d0e79ef6f" Name="Diagram1">
+      <Diagram DiagramId="a4e756b9faa441268f765f5d396242c5" Name="Diagram1">
         <EntityTypeShape EntityType="Model.Kategori" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Kullanici" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Satislar" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Sepet" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Urun" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Urun_Kategori" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Satislar_Kullanici" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Model.Sepet" Width="1.5" PointX="3" PointY="4.875" />
-        <AssociationConnector Association="Model.FK_Sepet_Kullanici" />
+        <AssociationConnector Association="Model.FK_Sepet_Kullanici" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

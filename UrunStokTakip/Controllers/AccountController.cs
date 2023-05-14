@@ -11,7 +11,7 @@ namespace UrunStokTakip.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-        Takip_SistemiEntities db = new Takip_SistemiEntities();
+        Takip_SistemiEntities1 db = new Takip_SistemiEntities1();
         public ActionResult Index()
         {
             return View();
@@ -24,7 +24,7 @@ namespace UrunStokTakip.Controllers
         [HttpPost]
         public ActionResult Login(Kullanici kullanici)
         {
-            var bilgiler = db.Kullanicis.FirstOrDefault(x => x.Email == kullanici.Email && x.Sifre == kullanici.Sifre);
+            var bilgiler = db.Kullanici.FirstOrDefault(x => x.Email == kullanici.Email && x.Sifre == kullanici.Sifre);
             if (bilgiler!=null)
             {
                 FormsAuthentication.SetAuthCookie(bilgiler.Email, false);
@@ -48,7 +48,7 @@ namespace UrunStokTakip.Controllers
         [HttpPost]
         public ActionResult Register(Kullanici data)
         {
-            db.Kullanicis.Add(data);
+            db.Kullanici.Add(data);
             data.Rol = "User";
             db.SaveChanges();
             return RedirectToAction("Login", "Account");
