@@ -6,10 +6,11 @@ using System.Web.Mvc;
 
 namespace UrunStokTakip.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         // GET: Home
-        [Authorize]
+        
         public ActionResult Index()
         {
             return View();

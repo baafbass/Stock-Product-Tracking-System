@@ -1,0 +1,33 @@
+﻿@model UrunStokTakip.Models.Kategori
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Ekle", "Kategori", FormMethod.Post, new { @class = "from-control" }))
+{
+    <br />
+    <br />
+    <div class="container">
+        <br/>
+        <div class="row">
+            <div class="col-md-4">
+                <tr>
+                    <td><label>Kategori Ad</label></td>
+                    <br/>
+                    <td>@Html.TextBoxFor(x => x.Ad, new { @class = "from-control" })<td>
+                </tr>
+                <br>
+                <tr>
+                    <td><label>Açıklama</label></td>
+                    <br/>
+                    <td>@Html.TextBoxFor(x => x.Aciklama, new { @class = "from-control" })<td>
+                </tr>
+                <br/>
+                <button class="btn btn-primary" type="submit">Ekle</button>
+                <a href="/Kategori/Index">Kategori Listesi</a>
+            </div>
+        </div>
+    </div>
+}
+
