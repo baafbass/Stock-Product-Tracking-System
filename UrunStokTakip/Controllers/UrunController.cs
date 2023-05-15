@@ -15,11 +15,16 @@ namespace UrunStokTakip.Controllers
         // GET: Urun
         Takip_SistemiEntities1 db = new Takip_SistemiEntities1();
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string ara)
         {
             var List = db.Urun.ToList();
+            if(!string.IsNullOrEmpty(ara))
+            {
+                List = List.Where(x => x.Ad.Contains(ara) || x.Aciklama.Contains(ara)).ToList();
+            }
             return View(List);
         }
+       // [Authorize(Roles = "Admin")]
         public ActionResult Ekle()
         {
             List<SelectListItem> deger1 = (from x in db.Kategori.ToList()
@@ -32,6 +37,8 @@ namespace UrunStokTakip.Controllers
             ViewBag.ktgr = deger1;
             return View();
         }
+       
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Ekle(Urun data, HttpPostedFileBase File)
         {
@@ -42,6 +49,8 @@ namespace UrunStokTakip.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+       
+       // [Authorize(Roles = "Admin")]
         public ActionResult Sil(int id =1)
         {
             var urun = db.Urun.Where(x => x.Id == id).FirstOrDefault();
@@ -49,6 +58,8 @@ namespace UrunStokTakip.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+       // [Authorize(Roles = "Admin")]
         public ActionResult Guncelle(int id=1)
         {
             var GuncelUrun = db.Urun.Where(x => x.Id == id).FirstOrDefault();
@@ -62,6 +73,8 @@ namespace UrunStokTakip.Controllers
             ViewBag.ktgr = deger1;
             return View(GuncelUrun);
         }
+
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Guncelle(Urun model,HttpPostedFileBase File)
         {
@@ -72,6 +85,7 @@ namespace UrunStokTakip.Controllers
                 urun.Aciklama = model.Aciklama;
                 urun.Fiyat = model.Fiyat;
                 urun.Stok = model.Stok;
+
                 urun.Populer = model.Populer;
                 urun.KategoriId = model.KategoriId;
                 db.SaveChanges();
@@ -89,6 +103,25 @@ namespace UrunStokTakip.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+        }
+        
+        //[Authorize(Roles = "Admin")]
+        public ActionResult KritikStok()
+        {
+            var kritik = db.Urun.Where(x => x.Stok <= 50).ToList();
+            return View(kritik);
+        }
+
+        public PartialViewResult StokCount()
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                var count = db.Urun.Where(x => x.Stok < 50).Count();
+                ViewBag.count = count;
+                var azalan = db.Urun.Where(x => x.Stok == 50).Count();
+                ViewBag.azalan = azalan;
+            }
+            return PartialView();
         }
     }
 }

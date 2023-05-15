@@ -5,7 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="container">
+    @using (Html.BeginForm())
+     {
+    <div style="width:25%;float:left">
+        @Html.TextBox("ara",null,new {@class = "form-control", @placeholder = "Ürün adi veya açıklama arayınız" })
 
+        <div style="float:left">
+            <input type="submit" name="btn" value="Ara" class="btn btn-info"/>
+        </div>
+        <br/>
+    </div>         
+     }
+</div>
+<br/>
 <a href="~/Urun/Ekle" class="btn btn-primary">Ekle</a>
 <br/>
 <br/>
@@ -19,7 +32,7 @@
         <th>Stok</th>
         <th>Kategori</th>
       <!--  @if (User.IsInRole("Admin"))
-        {} -->
+          { } -->
             <th>Sil</th>
             <th>Düzenle</th>
         
