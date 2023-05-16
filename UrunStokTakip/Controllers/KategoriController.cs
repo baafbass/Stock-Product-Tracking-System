@@ -11,7 +11,7 @@ namespace UrunStokTakip.Controllers
     public class KategoriController : Controller
     {
         // GET: Kategori
-        Takip_SistemiEntities1 db = new Takip_SistemiEntities1();
+        Takip_SistemiEntities2 db = new Takip_SistemiEntities2();
        
         public ActionResult Index()
         {

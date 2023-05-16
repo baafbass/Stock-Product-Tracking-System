@@ -4,16 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a4e756b9faa441268f765f5d396242c5" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Kategori" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Kullanici" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Satislar" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Sepet" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Urun" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_Urun_Kategori" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Satislar_Kullanici" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Sepet_Kullanici" ManuallyRouted="false" />
+      <Diagram DiagramId="789f6876ebde481797b9ce91c8d22350" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Kategori" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kullanici" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Satislar" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="Model.Sepet" Width="1.5" PointX="8.25" PointY="2.875" />
+        <EntityTypeShape EntityType="Model.Urun" Width="1.5" PointX="3" PointY="4.625" />
+        <AssociationConnector Association="Model.FK_Urun_Kategori" />
+        <AssociationConnector Association="Model.FK_Satislar_Kullanici" />
+        <AssociationConnector Association="Model.FK_Sepet_Kullanici" />
+        <AssociationConnector Association="Model.FK_Satislar_Urun" />
+        <AssociationConnector Association="Model.FK_Sepet_Urun" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -36,7 +36,7 @@ namespace UrunStokTakip.Roller
 
         public override string[] GetRolesForUser(string username)
         {
-            Takip_SistemiEntities1 db = new Takip_SistemiEntities1();
+            Takip_SistemiEntities2 db = new Takip_SistemiEntities2();
             var user = db.Kullanici.FirstOrDefault(x => x.Email == username);
             return new string[] { user.Rol };
         }

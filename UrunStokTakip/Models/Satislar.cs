@@ -20,8 +20,9 @@ namespace UrunStokTakip.Models
         public Nullable<decimal> Fiyat { get; set; }
         public Nullable<System.DateTime> Tarih { get; set; }
         public string Resim { get; set; }
-        public Nullable<int> KullaniciId { get; set; }
+        public Nullable<int> kullaniciId { get; set; }
     
         public virtual Kullanici Kullanici { get; set; }
+        public virtual Urun Urun { get; set; }
     }
 }

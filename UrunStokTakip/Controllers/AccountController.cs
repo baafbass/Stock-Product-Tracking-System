@@ -11,7 +11,7 @@ namespace UrunStokTakip.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-        Takip_SistemiEntities1 db = new Takip_SistemiEntities1();
+        Takip_SistemiEntities2 db = new Takip_SistemiEntities2();
 
         public ActionResult Index()
         {

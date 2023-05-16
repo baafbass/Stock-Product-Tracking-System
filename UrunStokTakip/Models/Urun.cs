@@ -14,15 +14,26 @@ namespace UrunStokTakip.Models
     
     public partial class Urun
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Urun()
+        {
+            this.Satislar = new HashSet<Satislar>();
+            this.Sepet = new HashSet<Sepet>();
+        }
+    
         public int Id { get; set; }
         public string Ad { get; set; }
         public string Aciklama { get; set; }
-        public string Fiyat { get; set; }
+        public Nullable<decimal> Fiyat { get; set; }
         public Nullable<int> Stok { get; set; }
         public Nullable<bool> Populer { get; set; }
         public string Resim { get; set; }
         public Nullable<int> KategoriId { get; set; }
     
         public virtual Kategori Kategori { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Satislar> Satislar { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sepet> Sepet { get; set; }
     }
 }

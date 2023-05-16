@@ -9,8 +9,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Aciklama" Type="nvarchar" MaxLength="50" />
           <Property Name="Durum" Type="bit" />
         </EntityType>
@@ -34,10 +34,10 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UrunId" Type="int" />
           <Property Name="Adet" Type="int" />
-          <Property Name="Fiyat" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Fiyat" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Tarih" Type="datetime" />
           <Property Name="Resim" Type="nvarchar" MaxLength="50" />
-          <Property Name="KullaniciId" Type="int" />
+          <Property Name="kullaniciId" Type="int" />
         </EntityType>
         <EntityType Name="Sepet">
           <Key>
@@ -68,7 +68,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ad" Type="nvarchar" MaxLength="50" />
           <Property Name="Aciklama" Type="nvarchar" MaxLength="50" />
-          <Property Name="Fiyat" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fiyat" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Stok" Type="int" />
           <Property Name="Populer" Type="bit" />
           <Property Name="Resim" Type="nvarchar" MaxLength="50" />
@@ -82,7 +82,19 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Satislar">
-              <PropertyRef Name="KullaniciId" />
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Satislar_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Satislar">
+              <PropertyRef Name="UrunId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -95,6 +107,18 @@
             </Principal>
             <Dependent Role="Sepet">
               <PropertyRef Name="KullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="UrunId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -121,8 +145,16 @@
             <End Role="Kullanici" EntitySet="Kullanici" />
             <End Role="Satislar" EntitySet="Satislar" />
           </AssociationSet>
+          <AssociationSet Name="FK_Satislar_Urun" Association="Self.FK_Satislar_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Satislar" EntitySet="Satislar" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sepet_Kullanici" Association="Self.FK_Sepet_Kullanici">
             <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Urun" Association="Self.FK_Sepet_Urun">
+            <End Role="Urun" EntitySet="Urun" />
             <End Role="Sepet" EntitySet="Sepet" />
           </AssociationSet>
           <AssociationSet Name="FK_Urun_Kategori" Association="Self.FK_Urun_Kategori">
@@ -138,11 +170,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Aciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Urun" Relationship="Self.FK_Urun_Kategori" FromRole="Kategori" ToRole="Urun" />
           <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="Urun" Relationship="Model.FK_Urun_Kategori" FromRole="Kategori" ToRole="Urun" />
         </EntityType>
         <EntityType Name="Kullanici">
           <Key>
@@ -156,9 +188,47 @@
           <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SifreTekrar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Rol" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Satislar" Relationship="Self.FK_Satislar_Kullanici" FromRole="Kullanici" ToRole="Satislar" />
-          <NavigationProperty Name="Sepet" Relationship="Self.FK_Sepet_Kullanici" FromRole="Kullanici" ToRole="Sepet" />
+          <NavigationProperty Name="Satislar" Relationship="Model.FK_Satislar_Kullanici" FromRole="Kullanici" ToRole="Satislar" />
+          <NavigationProperty Name="Sepet" Relationship="Model.FK_Sepet_Kullanici" FromRole="Kullanici" ToRole="Sepet" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="Takip_SistemiEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Satislar" EntityType="Model.Satislar" />
+          <EntitySet Name="Sepet" EntityType="Model.Sepet" />
+          <EntitySet Name="Urun" EntityType="Model.Urun" />
+          <AssociationSet Name="FK_Urun_Kategori" Association="Model.FK_Urun_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Satislar_Kullanici" Association="Model.FK_Satislar_Kullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Satislar" EntitySet="Satislar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Kullanici" Association="Model.FK_Sepet_Kullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Satislar_Urun" Association="Model.FK_Satislar_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Satislar" EntitySet="Satislar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Urun" Association="Model.FK_Sepet_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Satislar">
           <Key>
             <PropertyRef Name="Id" />
@@ -169,8 +239,9 @@
           <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Tarih" Type="DateTime" Precision="3" />
           <Property Name="Resim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="KullaniciId" Type="Int32" />
-          <NavigationProperty Name="Kullanici" Relationship="Self.FK_Satislar_Kullanici" FromRole="Satislar" ToRole="Kullanici" />
+          <Property Name="kullaniciId" Type="Int32" />
+          <NavigationProperty Name="Kullanici" Relationship="Model.FK_Satislar_Kullanici" FromRole="Satislar" ToRole="Kullanici" />
+          <NavigationProperty Name="Urun" Relationship="Model.FK_Satislar_Urun" FromRole="Satislar" ToRole="Urun" />
         </EntityType>
         <EntityType Name="Sepet">
           <Key>
@@ -183,17 +254,8 @@
           <Property Name="Tarih" Type="DateTime" Precision="3" />
           <Property Name="Resim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="KullaniciId" Type="Int32" />
-          <NavigationProperty Name="Kullanici" Relationship="Self.FK_Sepet_Kullanici" FromRole="Sepet" ToRole="Kullanici" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Kullanici" Relationship="Model.FK_Sepet_Kullanici" FromRole="Sepet" ToRole="Kullanici" />
+          <NavigationProperty Name="Urun" Relationship="Model.FK_Sepet_Urun" FromRole="Sepet" ToRole="Urun" />
         </EntityType>
         <EntityType Name="Urun">
           <Key>
@@ -202,16 +264,18 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Aciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fiyat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Stok" Type="Int32" />
           <Property Name="Populer" Type="Boolean" />
           <Property Name="Resim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="KategoriId" Type="Int32" />
-          <NavigationProperty Name="Kategori" Relationship="Self.FK_Urun_Kategori" FromRole="Urun" ToRole="Kategori" />
+          <NavigationProperty Name="Kategori" Relationship="Model.FK_Urun_Kategori" FromRole="Urun" ToRole="Kategori" />
+          <NavigationProperty Name="Satislar" Relationship="Model.FK_Satislar_Urun" FromRole="Urun" ToRole="Satislar" />
+          <NavigationProperty Name="Sepet" Relationship="Model.FK_Sepet_Urun" FromRole="Urun" ToRole="Sepet" />
         </EntityType>
         <Association Name="FK_Urun_Kategori">
-          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
-          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <End Type="Model.Kategori" Role="Kategori" Multiplicity="0..1" />
+          <End Type="Model.Urun" Role="Urun" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Kategori">
               <PropertyRef Name="Id" />
@@ -222,20 +286,20 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Satislar_Kullanici">
-          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
-          <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
+          <End Type="Model.Kullanici" Role="Kullanici" Multiplicity="0..1" />
+          <End Type="Model.Satislar" Role="Satislar" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Kullanici">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Satislar">
-              <PropertyRef Name="KullaniciId" />
+              <PropertyRef Name="kullaniciId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sepet_Kullanici">
-          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
-          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <End Type="Model.Kullanici" Role="Kullanici" Multiplicity="0..1" />
+          <End Type="Model.Sepet" Role="Sepet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Kullanici">
               <PropertyRef Name="Id" />
@@ -245,39 +309,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Takip_SistemiEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Kategori" EntityType="Self.Kategori" />
-          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
-          <EntitySet Name="Satislar" EntityType="Self.Satislar" />
-          <EntitySet Name="Sepet" EntityType="Self.Sepet" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Urun" EntityType="Self.Urun" />
-          <AssociationSet Name="FK_Urun_Kategori" Association="Self.FK_Urun_Kategori">
-            <End Role="Kategori" EntitySet="Kategori" />
-            <End Role="Urun" EntitySet="Urun" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Satislar_Kullanici" Association="Self.FK_Satislar_Kullanici">
-            <End Role="Kullanici" EntitySet="Kullanici" />
-            <End Role="Satislar" EntitySet="Satislar" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sepet_Kullanici" Association="Self.FK_Sepet_Kullanici">
-            <End Role="Kullanici" EntitySet="Kullanici" />
-            <End Role="Sepet" EntitySet="Sepet" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK_Satislar_Urun">
+          <End Type="Model.Urun" Role="Urun" Multiplicity="0..1" />
+          <End Type="Model.Satislar" Role="Satislar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Satislar">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Urun">
+          <End Type="Model.Urun" Role="Urun" Multiplicity="0..1" />
+          <End Type="Model.Sepet" Role="Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Takip_SistemiEntities1">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Takip_SistemiEntities2">
           <EntitySetMapping Name="Kategori">
             <EntityTypeMapping TypeName="Model.Kategori">
               <MappingFragment StoreEntitySet="Kategori">
-                <ScalarProperty Name="Durum" ColumnName="Durum" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -295,32 +363,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Satislar">
-            <EntityTypeMapping TypeName="Model.Satislar">
-              <MappingFragment StoreEntitySet="Satislar">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
-                <ScalarProperty Name="Adet" ColumnName="Adet" />
-                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
-                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
-                <ScalarProperty Name="Resim" ColumnName="Resim" />
-                <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sepet">
-            <EntityTypeMapping TypeName="Model.Sepet">
-              <MappingFragment StoreEntitySet="Sepet">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
-                <ScalarProperty Name="Adet" ColumnName="Adet" />
-                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
-                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
-                <ScalarProperty Name="Resim" ColumnName="Resim" />
-                <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -332,17 +374,43 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Satislar">
+            <EntityTypeMapping TypeName="Model.Satislar">
+              <MappingFragment StoreEntitySet="Satislar">
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sepet">
+            <EntityTypeMapping TypeName="Model.Sepet">
+              <MappingFragment StoreEntitySet="Sepet">
+                <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Urun">
             <EntityTypeMapping TypeName="Model.Urun">
               <MappingFragment StoreEntitySet="Urun">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Ad" ColumnName="Ad" />
-                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
-                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
-                <ScalarProperty Name="Stok" ColumnName="Stok" />
-                <ScalarProperty Name="Populer" ColumnName="Populer" />
-                <ScalarProperty Name="Resim" ColumnName="Resim" />
                 <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="Populer" ColumnName="Populer" />
+                <ScalarProperty Name="Stok" ColumnName="Stok" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

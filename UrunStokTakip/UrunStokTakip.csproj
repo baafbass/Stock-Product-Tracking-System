@@ -156,6 +156,7 @@
     <Content Include="Content\Image\Bilgisayar.jpg" />
     <Content Include="Content\Image\Camera.jpeg" />
     <Content Include="Content\Image\Samsung.jpeg" />
+    <Content Include="Content\Image\sepet.jpeg" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
@@ -452,6 +453,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
+    <Compile Include="Controllers\SepetController.cs" />
     <Compile Include="Controllers\UrunController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -635,6 +637,8 @@
     <Content Include="Views\Kategori\Index.cshtml" />
     <Content Include="Views\Kategori\Ekle.cshtml" />
     <Content Include="Views\Kategori\Guncelle.cshtml" />
+    <Content Include="Views\Sepet\Index.cshtml" />
+    <Content Include="Views\Sepet\SepetCount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

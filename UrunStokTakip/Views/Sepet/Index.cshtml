@@ -1,0 +1,118 @@
+﻿@model List<UrunStokTakip.Models.Sepet>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Session["Ad"]</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ürün Bilgisi</th>
+            <th>Adet</th>
+            <th>Fiyat</th>
+            <th>Tarih</th>
+            <th>Resim</th>
+            <th>Sil</th>
+            <th>Satin al</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+            {
+            <tr>
+             <td>@item.Urun.Ad</td>
+
+                <td>
+                    <div>
+                        @Html.ActionLink("-", "azalt", new { id = item.Id }, new { @class = "btn btn-info btn-sm azalt" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(x=> item.Adet, new {@class="txt",data_id=item.Id })
+                    </div>
+                    <div>
+                        @Html.ActionLink("+","arttir", new { id=item.Id},new {@class="btn btn-info btn-sm arttir" })
+                    </div>
+                </td>
+
+             <td>@item.Adet</td>
+             <td>@item.Fiyat</td>
+             <td>@Convert.ToDateTime(item.Tarih).ToString("dd/MM/yyyy")</td>
+             <td><img src="~/Content/Image/@item.Urun.Resim" width="90" height="90"></td>
+                
+
+             <td>
+
+                <!-- @if (User.IsInRole("User")) { }-->
+                 <a href="/Urun/Sil/@item.Id">Sil</a>
+             </td>
+                <td><a href="/Satislar/SatinAl/@item.Id" class="btn btn-success">Satin Al</a></td>
+            </tr>
+            }
+    </tbody>
+</table>
+
+<div class="container">
+    @ViewBag.Tutar
+</div>
+<br/>
+<div class="form-group">
+    <a href="/Satislar/HepsiniSatinAl" class="btn btn-success form-control">Tümünü Satın Al</a>
+</div>
+
+<div class="form-group">
+    <a href="/Sepet/HepsiniSil" class="btn btn-danger form-control">Tümünü Sil</a>
+</div>
+
+<style>
+    .txt
+    {
+        line-height:18px;
+        width : 50px!important;
+        height:32px;
+        font-size:14px;
+        text-align:center;
+        border: solid 1px #ccc;
+        margin-left:23px;
+    }
+    .arttir
+    {
+        display: block;
+        cursor: pointer;
+        border:solid 1px #ccc;
+        position:absolute;
+        margin-left:75px;
+        margin-top:-30px;
+    }
+
+    .azalt
+    {
+       display:block;
+       cursor:pointer;
+       border:solid 1px #ccc;
+       position:absolute;
+       margin-right:95px;
+    }
+
+</style>
+<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+<script>
+    $(function () {
+        $('.txt').on('change'), function () {
+            var miktar = $(this).val();
+            var sepetid = $(this).attr('data_id');
+            $.ajax(
+                {
+                    url: '/Sepet/AdetYaz',
+                    data: { id: sepetid, miktari: miktar },
+                    success: function (res) {
+                        document.location.reload();
+                    }
+                }
+
+            )
+        }
+    }
+        )
+</script>

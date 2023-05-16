@@ -13,10 +13,10 @@ namespace UrunStokTakip.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Takip_SistemiEntities1 : DbContext
+    public partial class Takip_SistemiEntities2 : DbContext
     {
-        public Takip_SistemiEntities1()
-            : base("name=Takip_SistemiEntities1")
+        public Takip_SistemiEntities2()
+            : base("name=Takip_SistemiEntities2")
         {
         }
     
@@ -27,9 +27,9 @@ namespace UrunStokTakip.Models
     
         public virtual DbSet<Kategori> Kategori { get; set; }
         public virtual DbSet<Kullanici> Kullanici { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Satislar> Satislar { get; set; }
         public virtual DbSet<Sepet> Sepet { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Urun> Urun { get; set; }
     }
 }
