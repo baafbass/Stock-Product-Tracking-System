@@ -136,7 +136,7 @@ namespace UrunStokTakip.Controllers
                 var sil = db.Sepet.Where(x => x.KullaniciId == model.Id);
                 db.Sepet.RemoveRange(sil);
                 db.SaveChanges();
-                RedirectToAction("Index");
+               return RedirectToAction("Index");
             }
             return HttpNotFound();
         }

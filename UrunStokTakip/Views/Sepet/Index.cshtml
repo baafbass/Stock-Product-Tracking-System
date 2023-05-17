@@ -35,8 +35,6 @@
                         @Html.ActionLink("+","arttir", new { id=item.Id},new {@class="btn btn-info btn-sm arttir" })
                     </div>
                 </td>
-
-             <td>@item.Adet</td>
              <td>@item.Fiyat</td>
              <td>@Convert.ToDateTime(item.Tarih).ToString("dd/MM/yyyy")</td>
              <td><img src="~/Content/Image/@item.Urun.Resim" width="90" height="90"></td>
@@ -45,9 +43,9 @@
              <td>
 
                 <!-- @if (User.IsInRole("User")) { }-->
-                 <a href="/Urun/Sil/@item.Id">Sil</a>
+                 <a href="/Sepet/Sil/@item.Id">Sil</a>
              </td>
-                <td><a href="/Satislar/SatinAl/@item.Id" class="btn btn-success">Satin Al</a></td>
+                <td><a href="/Satis/SatinAl/@item.Id" class="btn btn-success">Satin Al</a></td>
             </tr>
             }
     </tbody>
