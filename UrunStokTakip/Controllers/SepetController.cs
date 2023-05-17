@@ -119,5 +119,26 @@ namespace UrunStokTakip.Controllers
             db.SaveChanges();
         }
 
+        public ActionResult Sil(int id)
+        {
+            var silSepet = db.Sepet.Find(id);
+            db.Sepet.Remove(silSepet);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult HepsiniSil()
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                var kullaniciAdi = User.Identity.Name;
+                var model = db.Kullanici.FirstOrDefault(x => x.Email == kullaniciAdi);
+                var sil = db.Sepet.Where(x => x.KullaniciId == model.Id);
+                db.Sepet.RemoveRange(sil);
+                db.SaveChanges();
+                RedirectToAction("Index");
+            }
+            return HttpNotFound();
+        }
     }
 }
