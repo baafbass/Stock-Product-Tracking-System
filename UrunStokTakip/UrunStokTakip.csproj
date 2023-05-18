@@ -670,6 +670,7 @@
     <Content Include="Views\Satis\Index.cshtml" />
     <Content Include="Views\Satis\islem.cshtml" />
     <Content Include="Views\Satis\SatinAl.cshtml" />
+    <Content Include="Views\Satis\HepsiniSatinAl.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
