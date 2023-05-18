@@ -1,0 +1,42 @@
+﻿@model UrunStokTakip.Models.Kullanici
+
+@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet">
+<form method="post">
+    <div class="container">
+        <br />
+        <div class="form-group">
+            <label>Ad</label>
+            <input type="text" name="Ad" value="@Model.Ad" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Soyad</label>
+            <input type="text" name="Soyad" value="@Model.Soyad" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Kullanıcı Adı</label>
+            <input type="text" name="KullaniciAd" value="@Model.KullaniciAd" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="Email" value="@Model.Email" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Şifre</label>
+            <input type="text" name="Sifre" value="@Model.Sifre" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Şifre Tekrar</label>
+            <input type="text" name="SifreTekrar" value="@Model.SifreTekrar" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+    </div>
+</form>
