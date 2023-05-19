@@ -677,6 +677,7 @@
     <Content Include="Views\Account\Guncelle.cshtml" />
     <Content Include="Views\Kullanici\SifreReset.cshtml" />
     <Content Include="Views\Istatistik\Index.cshtml" />
+    <Content Include="Views\TumSatislar\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -686,7 +687,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\TumSatislar\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
