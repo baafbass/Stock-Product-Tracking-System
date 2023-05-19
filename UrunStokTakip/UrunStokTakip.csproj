@@ -480,6 +480,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
+    <Compile Include="Controllers\KullaniciController.cs" />
     <Compile Include="Controllers\SatisController.cs" />
     <Compile Include="Controllers\SepetController.cs" />
     <Compile Include="Controllers\UrunController.cs" />
@@ -672,6 +673,7 @@
     <Content Include="Views\Satis\SatinAl.cshtml" />
     <Content Include="Views\Satis\HepsiniSatinAl.cshtml" />
     <Content Include="Views\Account\Guncelle.cshtml" />
+    <Content Include="Views\Kullanici\SifreReset.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
