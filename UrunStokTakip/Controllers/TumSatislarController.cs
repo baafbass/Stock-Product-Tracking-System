@@ -17,5 +17,19 @@ namespace UrunStokTakip.Controllers
         {
             return View(db.Satislar.ToList().ToPagedList(sayfa,5)) ;
         }
+
+        public ActionResult HepsiniSil()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var kullaniciAdi = User.Identity.Name;
+                var model = db.Kullanici.FirstOrDefault(x => x.Email == kullaniciAdi);
+                var sil = db.Satislar.Where(x => x.kullaniciId == model.Id);
+                db. Satislar.RemoveRange(sil);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
+        }
     }
 }

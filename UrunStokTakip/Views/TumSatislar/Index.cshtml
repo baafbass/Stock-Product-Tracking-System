@@ -34,4 +34,8 @@
     </tbody>
 </table>
 
-@Html.PagedListPager(Model, sayfa => Url.Action("Index", new { sayfa }), PagedListRenderOptions.Classic);
+@Html.PagedListPager(Model, sayfa => Url.Action("Index", new { sayfa }), PagedListRenderOptions.Classic)
+
+<div class="form-group">
+    <a href="/TumSatislar/HepsiniSil" class="btn btn-danger form-control">Tümünü Sil</a>
+</div>
