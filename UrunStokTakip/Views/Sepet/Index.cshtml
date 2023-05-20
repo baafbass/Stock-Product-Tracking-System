@@ -42,8 +42,10 @@
 
              <td>
 
-                <!-- @if (User.IsInRole("User")) { }-->
+                 @if (User.IsInRole("Utilisator"))
+                {
                  <a href="/Sepet/Sil/@item.Id">Sil</a>
+                }
              </td>
                 <td><a href="/Satis/SatinAl/@item.Id" class="btn btn-success">Satin Al</a></td>
             </tr>

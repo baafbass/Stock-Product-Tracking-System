@@ -38,7 +38,10 @@
             <label>Kategori</label>
             @Html.DropDownListFor(x => x.KategoriId, (List<SelectListItem>)ViewBag.ktgr, new { @class = "form-control" })
         </div>
+        @if (User.IsInRole("Admintrato"))
+        {
         <button class="btn btn-primary" type="submit">Ekle</button>
+        }
         <a href="/Urun/Index">Ürün Listesi</a>
     </div>
 </div>    

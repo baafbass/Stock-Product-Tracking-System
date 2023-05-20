@@ -7,26 +7,33 @@
 
 <br />
 <br />
+@if (User.IsInRole("Admintrato"))
+{
 <a href="/Kategori/Ekle" class="btn btn-primary">Ekle</a>
+}
 <br/>
 <br/>
 <table class="table table-bordered">
     <tr>
         <th>Ad</th>
         <th>Açıklama</th>
-      <!--  @if(User.IsInRole("Admin")){ } -->
+        @if (User.IsInRole("Admintrato"))
+        {
 
         <th>Sil</th>
         <th>Düzenle</th>
+        }
     </tr>
     @foreach(var item in Model)
             {
 <tr>
     <td>@item.Ad</td>
     <td>@item.Aciklama</td>
-    <!-- @if (User.IsInRole("Admin")){ } -->
+     @if (User.IsInRole("Admintrato"))
+     {
     <td><a href="/Kategori/Sil/@item.Id">Sil</a></td>
     <td><a href="/Kategori/Guncelle/@item.Id" class="btn btn-warning">Düzenle</a></td>
+     }
 </tr>
             }
 </table>

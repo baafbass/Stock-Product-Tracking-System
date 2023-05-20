@@ -17,9 +17,8 @@
             </div>
             <ul class="nav navbar-nav">
 
-                 @if (User.IsInRole("Admin"))
+                 @if (User.IsInRole("Admintrato"))
                {
-                <li><a href="/Kullanici/Index">Kullanıcı</a></li>
                 <li><a href="/TumSatislar/Index">Tüm Satışlar</a></li>
                 <li><a href="/Urun/KritikStok">Kritik Stok @Html.Action("StokCount","Urun")</a></li>
                 <li><a href="/Urun/StokGrafik">Stok Grafiği</a></li>
@@ -30,11 +29,11 @@
                 <li><a href="/Account/Guncelle" style="color:white">@Session["Ad"] @Session["Soyad"]</a></li>
                 <li><a href="/Urun/Index">Ürünler</a></li>
 
-                <!--  @if (User.IsInRole("User"))
-      { } -->
+               @if (User.IsInRole("Utilisator"))
+            { 
                 <li><a href="/Satis/Index"></a></li>
                 <li><a href="/Sepet/Index"><img src="~/Content/Image/sepet.jpeg" width="30" height="30"><label style="color:red">@{Html.RenderAction("SepetCount","Sepet");}</label></a></li>
-
+            }
                 <li><a href="/Account/LogOut">Çıkış Yap</a></li>
             </ul>
         </div>

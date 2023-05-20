@@ -24,7 +24,10 @@
                     <td>@Html.TextBoxFor(x => x.Aciklama, new { @class = "from-control" })<td>
                 </tr>
                 <br/>
+                @if (User.IsInRole("Admintrator"))
+                {
                 <button class="btn btn-primary" type="submit">Ekle</button>
+                }
                 <a href="/Kategori/Index">Kategori Listesi</a>
             </div>
         </div>

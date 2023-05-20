@@ -31,15 +31,16 @@
         <th>Fiyat</th>
         <th>Stok</th>
         <th>Kategori</th>
-      <!--  @if (User.IsInRole("Admin"))
-          { } -->
+        @if (User.IsInRole("Admintrato"))
+        {
             <th>Sil</th>
             <th>Düzenle</th>
-        
-      <!--  @if (User.IsInRole("User"))
-        {} -->
+        }
+
+        @if (User.IsInRole("Utilisator"))
+        {
             <th>Sepete Ekle</th>
-        
+        }
 
     </tr>
        
@@ -63,14 +64,15 @@
     <td>@item.Stok</td>
     <td>@item.Kategori.Ad</td>
 
-   <!-- @if (User.IsInRole("Admin"))
-    { } -->
+    @if (User.IsInRole("Admintrato"))
+    {
     <td><a href="/Urun/Sil/@item.Id">Sil</a></td>
     <td><a href="/Urun/Guncelle/@item.Id" class="btn btn-warning">Düzenle</a></td>
-    
-   <!-- @if (User.IsInRole("User"))
-    { } -->
+    }
+    @if (User.IsInRole("Utilisator"))
+    {
      <td><a href="/Sepet/SepeteEkle/@item.Id" class="btn btn-success">Sepete Ekle</a></td>
+    }
 </tr>
          }
 
