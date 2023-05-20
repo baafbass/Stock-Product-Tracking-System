@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="789f6876ebde481797b9ce91c8d22350" Name="Diagram1">
         <EntityTypeShape EntityType="Model.Kategori" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Kullanici" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kullanici" Width="1.5" PointX="1.875" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Satislar" Width="1.5" PointX="5.25" PointY="2.875" />
         <EntityTypeShape EntityType="Model.Sepet" Width="1.5" PointX="8.25" PointY="2.875" />
@@ -16,6 +16,7 @@
         <AssociationConnector Association="Model.FK_Sepet_Kullanici" />
         <AssociationConnector Association="Model.FK_Satislar_Urun" />
         <AssociationConnector Association="Model.FK_Sepet_Urun" />
+        <EntityTypeShape EntityType="Model.KullaniciView" Width="1.5" PointX="5.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

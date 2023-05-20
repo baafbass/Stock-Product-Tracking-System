@@ -74,6 +74,19 @@
           <Property Name="Resim" Type="nvarchar" MaxLength="50" />
           <Property Name="KategoriId" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Takip Sistemi.dbo.KullaniciView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="KullaniciView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="KullaniciAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="8" />
+        </EntityType>
         <Association Name="FK_Satislar_Kullanici">
           <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
           <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
@@ -141,6 +154,16 @@
           <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Urun" EntityType="Self.Urun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciView" EntityType="Self.KullaniciView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [KullaniciView].[Id] AS [Id], 
+    [KullaniciView].[Ad] AS [Ad], 
+    [KullaniciView].[Soyad] AS [Soyad], 
+    [KullaniciView].[Email] AS [Email], 
+    [KullaniciView].[KullaniciAd] AS [KullaniciAd], 
+    [KullaniciView].[Sifre] AS [Sifre]
+    FROM [dbo].[KullaniciView] AS [KullaniciView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Satislar_Kullanici" Association="Self.FK_Satislar_Kullanici">
             <End Role="Kullanici" EntitySet="Kullanici" />
             <End Role="Satislar" EntitySet="Satislar" />
@@ -228,6 +251,7 @@
             <End Role="Urun" EntitySet="Urun" />
             <End Role="Sepet" EntitySet="Sepet" />
           </AssociationSet>
+          <EntitySet Name="KullaniciView" EntityType="Model.KullaniciView" />
         </EntityContainer>
         <EntityType Name="Satislar">
           <Key>
@@ -333,6 +357,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="KullaniciView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -409,6 +444,18 @@
                 <ScalarProperty Name="Stok" ColumnName="Stok" />
                 <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
                 <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciView">
+            <EntityTypeMapping TypeName="Model.KullaniciView">
+              <MappingFragment StoreEntitySet="KullaniciView">
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAd" ColumnName="KullaniciAd" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

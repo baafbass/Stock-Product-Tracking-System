@@ -1,0 +1,36 @@
+﻿@using UrunStokTakip.Models
+@model List<KullaniciView>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kullanıcılar</h2>
+
+<br>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>AD</th>
+        <th>SOYAD</th>
+        <th>EMAIL</th>
+        <th>KULLANICIADI</th>
+        <th>SİFRE</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Ad</td>
+            <td>@item.Soyad</td>
+            <td>@item.Email</td>
+            <td>@item.KullaniciAd</td>
+            <td>@item.Sifre</td>
+        </tr>
+    }
+</table>
+
+

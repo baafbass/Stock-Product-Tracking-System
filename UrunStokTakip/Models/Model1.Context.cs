@@ -31,5 +31,6 @@ namespace UrunStokTakip.Models
         public virtual DbSet<Satislar> Satislar { get; set; }
         public virtual DbSet<Sepet> Sepet { get; set; }
         public virtual DbSet<Urun> Urun { get; set; }
+        public virtual DbSet<KullaniciView> KullaniciView { get; set; }
     }
 }

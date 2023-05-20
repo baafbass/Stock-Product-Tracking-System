@@ -14,11 +14,14 @@ namespace UrunStokTakip.Controllers
         Takip_SistemiEntities2 db = new Takip_SistemiEntities2();
 
         // GET: Kullanici
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            var kullanicilar = db.KullaniciView.ToList();
+            return View(kullanicilar);
         }
         
+
         public ActionResult SifreReset()
         {
             return View();

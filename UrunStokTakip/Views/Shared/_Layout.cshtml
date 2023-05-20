@@ -13,27 +13,28 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/Home/Index">Ürün Stok Takip</a>
+                <a class="navbar-brand" href="/Home/Index">Stok Ürünü Takip Sistemi</a>
             </div>
             <ul class="nav navbar-nav">
 
-                 @if (User.IsInRole("Admintrato"))
-               {
-                <li><a href="/TumSatislar/Index">Tüm Satışlar</a></li>
-                <li><a href="/Urun/KritikStok">Kritik Stok @Html.Action("StokCount","Urun")</a></li>
-                <li><a href="/Urun/StokGrafik">Stok Grafiği</a></li>
-                <li><a href="/Istatistik/Index">İstatistikler</a></li>
+                @if (User.IsInRole("Admintrato"))
+                {
+                    <li><a href="/Kullanici/Index">Kullanıcılar</a></li>
+                    <li><a href="/TumSatislar/Index">Tüm Satışlar</a></li>
+                    <li><a href="/Urun/KritikStok">Kritik Stok @Html.Action("StokCount", "Urun")</a></li>
+                    <li><a href="/Urun/StokGrafik">Stok Grafiği</a></li>
+                    <li><a href="/Istatistik/Index">İstatistikler</a></li>
                 }
 
                 <li><a href="/Kategori/Index">Kategoriler</a></li>
                 <li><a href="/Account/Guncelle" style="color:white">@Session["Ad"] @Session["Soyad"]</a></li>
                 <li><a href="/Urun/Index">Ürünler</a></li>
 
-               @if (User.IsInRole("Utilisator"))
-            { 
-                <li><a href="/Satis/Index"></a></li>
-                <li><a href="/Sepet/Index"><img src="~/Content/Image/sepet.jpeg" width="30" height="30"><label style="color:red">@{Html.RenderAction("SepetCount","Sepet");}</label></a></li>
-            }
+                @if (User.IsInRole("Utilisator"))
+                {
+                    <li><a href="/Satis/Index"></a></li>
+                    <li><a href="/Sepet/Index"><img src="~/Content/Image/sepet.jpeg" width="30" height="30"><label style="color:red">@{Html.RenderAction("SepetCount", "Sepet");}</label></a></li>
+                }
                 <li><a href="/Account/LogOut">Çıkış Yap</a></li>
             </ul>
         </div>
