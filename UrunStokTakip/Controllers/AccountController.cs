@@ -53,12 +53,13 @@ namespace UrunStokTakip.Controllers
         {
             var kullanicilar = (string)Session["Mail"];
             var user = db.Kullanici.Where(x => x.Email == kullanicilar).FirstOrDefault();
-            user.Ad = data.Ad;
+            db.KullaniciGuncelle(user.Id, data.Ad, data.Soyad, data.Email, data.KullaniciAd, data.Sifre, data.SifreTekrar);
+            /*user.Ad = data.Ad;
             user.Soyad = data.Soyad;
             user.Email = data.Email;
             user.KullaniciAd = data.KullaniciAd;
             user.Sifre = data.Sifre;
-            user.SifreTekrar = data.SifreTekrar;
+            user.SifreTekrar = data.SifreTekrar;*/
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
@@ -70,8 +71,8 @@ namespace UrunStokTakip.Controllers
         [HttpPost]
         public ActionResult Register(Kullanici data)
         {
-            db.Kullanici.Add(data);
-            data.Rol = "User";
+            db.kullaniciEkle(data.Ad, data.Soyad, data.Email, data.KullaniciAd, data.Sifre,data.SifreTekrar);
+            //data.Rol = "User";
             db.SaveChanges();
             return RedirectToAction("Login", "Account");
         }

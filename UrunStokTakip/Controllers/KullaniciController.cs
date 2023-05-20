@@ -20,7 +20,6 @@ namespace UrunStokTakip.Controllers
             var kullanicilar = db.KullaniciView.ToList();
             return View(kullanicilar);
         }
-        
 
         public ActionResult SifreReset()
         {
